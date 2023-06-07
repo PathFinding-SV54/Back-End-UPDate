@@ -7,35 +7,35 @@ namespace Domain;
 
 public class ActivityDomain: IActivityDomain
 {
-    private IActivityInfraestructure _activityInfraestructure;
+    private IActivityInfrastructure _activityInfrastructure;
 
-    public ActivityDomain(IActivityInfraestructure activityInfraestructure)
+    public ActivityDomain(IActivityInfrastructure activityInfrastructure)
     {
-        _activityInfraestructure = activityInfraestructure;
+        _activityInfrastructure = activityInfrastructure;
     }
 
     public List<Activity> GetAll()
     {
-        return _activityInfraestructure.GetAll();
+        return _activityInfrastructure.GetAll();
     }
 
     public Activity GetById(int id)
     {
-        return _activityInfraestructure.GetById(id);
+        return _activityInfrastructure.GetById(id);
     }
 
     public bool Create(ActivityData activityData)
     {
-        return _activityInfraestructure.Create(activityData);
+        return _activityInfrastructure.Create(activityData);
     }
 
     public bool Update(int id, ActivityData activityData)
     {
-        return _activityInfraestructure.Update(id, activityData);
+        return _activityInfrastructure.Update(id, activityData);
     }
 
     public bool Delete(int id)
     {
-        return _activityInfraestructure.Delete(id);
+        return _activityInfrastructure.Delete(id);
     }
 }

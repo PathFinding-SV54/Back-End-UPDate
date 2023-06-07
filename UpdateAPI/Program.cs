@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //dependecy inyection
-builder.Services.AddScoped<IActivityInfraestructure, ActivityInfraestructure>();
+builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();
 builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 
 //Conexion a MySQL 

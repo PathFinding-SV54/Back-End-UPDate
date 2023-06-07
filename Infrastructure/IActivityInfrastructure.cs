@@ -3,7 +3,7 @@ using Infrastructure.Model;
 
 namespace Infrastructure;
 
-public interface IActivityInfraestructure
+public interface IActivityInfrastructure
 {
     List<Activity> GetAll();
     public Activity GetById(int id);

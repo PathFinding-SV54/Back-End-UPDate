@@ -16,12 +16,12 @@ namespace update
     public class ActivityController : ControllerBase
     {
         //Inyeccion
-        private IActivityInfraestructure _activityInfraestructure;
+        private IActivityInfrastructure _activityInfrastructure;
         private IActivityDomain _activityDomain;
 
-        public ActivityController(IActivityInfraestructure activityInfraestructure, IActivityDomain activityDomain)
+        public ActivityController(IActivityInfrastructure activityInfrastructure, IActivityDomain activityDomain)
         {
-            _activityInfraestructure = activityInfraestructure;
+            _activityInfrastructure = activityInfrastructure;
             _activityDomain = activityDomain;
         }
         

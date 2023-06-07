@@ -4,11 +4,11 @@ using Infrastructure.Model;
 
 namespace Infrastructure;
 
-public class ActivityInfraestructure : IActivityInfraestructure
+public class ActivityInfrastructure : IActivityInfrastructure
 {
     private UpdateDbContext _updateDbContext;
 
-    public ActivityInfraestructure(UpdateDbContext updateDbContext)
+    public ActivityInfrastructure(UpdateDbContext updateDbContext)
     {
         _updateDbContext = updateDbContext;
     }
