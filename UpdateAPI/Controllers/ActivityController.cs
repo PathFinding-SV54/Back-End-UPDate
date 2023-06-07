@@ -35,7 +35,7 @@ namespace update
         }
 
         // GET: api/Activity/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetActivity")]
         public Activity Get(int id)
         {
             return _activityDomain.GetById(id);
