@@ -1,6 +1,6 @@
 using Domain;
-using Infraestructure;
-using Infraestructure.DataClass;
+using Infrastructure;
+using Infrastructure.DataClass;
 
 namespace UpDate.Domain.Test;
 using Moq;
@@ -32,7 +32,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Create(activityData))
             .Returns(true);
@@ -50,7 +50,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Create(activityData))
             .Returns(false);
@@ -68,7 +68,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Update(5,activityData))
             .Returns(true);
@@ -86,7 +86,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Update(5,activityData))
             .Returns(false);
@@ -99,7 +99,7 @@ public class UnitTest1
     [Fact]
     public void Delete_ValidActivity_ReturnSuccess()
     {
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Delete(5))
             .Returns(true);
@@ -117,7 +117,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Delete(5))
             .Returns(false);
@@ -134,7 +134,7 @@ public class UnitTest1
         {
             Title = "test1"
         };
-        var mockTutorialInfraestructure = new Mock<IActivityInfraestructure>();
+        var mockTutorialInfraestructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfraestructure.Setup(t =>
                 t.Create(activityData))
             .Returns(false);

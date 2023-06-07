@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
-using Infraestructure;
-using Infraestructure.DataClass;
+using Infrastructure;
+using Infrastructure.DataClass;
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +16,12 @@ namespace update
     public class ActivityController : ControllerBase
     {
         //Inyeccion
-        private IActivityInfraestructure _activityInfraestructure;
+        private IActivityInfrastructure _activityInfrastructure;
         private IActivityDomain _activityDomain;
 
-        public ActivityController(IActivityInfraestructure activityInfraestructure, IActivityDomain activityDomain)
+        public ActivityController(IActivityInfrastructure activityInfrastructure, IActivityDomain activityDomain)
         {
-            _activityInfraestructure = activityInfraestructure;
+            _activityInfrastructure = activityInfrastructure;
             _activityDomain = activityDomain;
         }
         
@@ -35,7 +35,7 @@ namespace update
         }
 
         // GET: api/Activity/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetActivity")]
         public Activity Get(int id)
         {
             return _activityDomain.GetById(id);

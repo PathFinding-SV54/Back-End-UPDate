@@ -1,5 +1,5 @@
 using Domain;
-using Infraestructure;
+using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +13,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //dependecy inyection
-builder.Services.AddScoped<IActivityInfraestructure, ActivityInfraestructure>();
+builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();
 builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
+
+builder.Services.AddScoped<ICommunityInfrastructure, CommunityInfrastructure>();
+builder.Services.AddScoped<ICommunityDomain, CommunityDomain>();
 
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
@@ -25,7 +28,7 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
-builder.Services.AddDbContext<UpdateDBContext>(
+builder.Services.AddDbContext<UpdateDbContext>(
     dbContextOptions =>
     {
         dbContextOptions.UseMySql(connectionString,
@@ -40,7 +43,7 @@ builder.Services.AddDbContext<UpdateDBContext>(
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
-using (var context = scope.ServiceProvider.GetService<UpdateDBContext>())
+using (var context = scope.ServiceProvider.GetService<UpdateDbContext>())
 {
     context.Database.EnsureCreated();
 }

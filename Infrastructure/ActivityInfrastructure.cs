@@ -1,14 +1,14 @@
-﻿using Infraestructure.DataClass;
-using Infrastructure.Context;
+﻿using Infrastructure.Context;
+using Infrastructure.DataClass;
 using Infrastructure.Model;
 
-namespace Infraestructure;
+namespace Infrastructure;
 
-public class ActivityInfraestructure : IActivityInfraestructure
+public class ActivityInfrastructure : IActivityInfrastructure
 {
-    private UpdateDBContext _updateDbContext;
+    private UpdateDbContext _updateDbContext;
 
-    public ActivityInfraestructure(UpdateDBContext updateDbContext)
+    public ActivityInfrastructure(UpdateDbContext updateDbContext)
     {
         _updateDbContext = updateDbContext;
     }

@@ -1,4 +1,4 @@
-﻿using Infraestructure.DataClass;
+﻿using Infrastructure.DataClass;
 using Infrastructure.Model;
 
 namespace Domain;
