@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();
 builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 
+builder.Services.AddScoped<ICommunityInfrastructure, CommunityInfrastructure>();
+
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
