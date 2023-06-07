@@ -17,6 +17,7 @@ builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();
 builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 
 builder.Services.AddScoped<ICommunityInfrastructure, CommunityInfrastructure>();
+builder.Services.AddScoped<ICommunityDomain, CommunityDomain>();
 
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
