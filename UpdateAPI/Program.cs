@@ -1,5 +1,5 @@
 using Domain;
-using Infraestructure;
+using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +25,7 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
-builder.Services.AddDbContext<UpdateDBContext>(
+builder.Services.AddDbContext<UpdateDbContext>(
     dbContextOptions =>
     {
         dbContextOptions.UseMySql(connectionString,
@@ -40,7 +40,7 @@ builder.Services.AddDbContext<UpdateDBContext>(
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
-using (var context = scope.ServiceProvider.GetService<UpdateDBContext>())
+using (var context = scope.ServiceProvider.GetService<UpdateDbContext>())
 {
     context.Database.EnsureCreated();
 }

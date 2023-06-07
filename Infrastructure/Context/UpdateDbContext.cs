@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context;
 
-public class UpdateDBContext :DbContext
+public class UpdateDbContext :DbContext
 {
-    public UpdateDBContext()
+    public UpdateDbContext()
     {
         
     }
     
-    public UpdateDBContext(DbContextOptions<UpdateDBContext> options) : base(options)
+    public UpdateDbContext(DbContextOptions<UpdateDbContext> options) : base(options)
     {
     }
     

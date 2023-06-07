@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
-using Infraestructure;
-using Infraestructure.DataClass;
+using Infrastructure;
+using Infrastructure.DataClass;
 using Infrastructure.Model;
 
 namespace Domain;

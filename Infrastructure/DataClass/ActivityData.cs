@@ -1,4 +1,6 @@
-﻿namespace Infraestructure.DataClass;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Infrastructure.DataClass;
 
 public class ActivityData
 {

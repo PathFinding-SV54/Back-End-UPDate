@@ -1,6 +1,6 @@
 using Domain;
-using Infraestructure;
-using Infraestructure.DataClass;
+using Infrastructure;
+using Infrastructure.DataClass;
 
 namespace UpDate.Domain.Test;
 using Moq;
