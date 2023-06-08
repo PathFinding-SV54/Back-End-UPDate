@@ -1,13 +1,12 @@
-﻿using Infrastructure.DataClass;
-using Infrastructure.Model;
+﻿using Infrastructure.Model;
 
-namespace Domain;
+namespace Domain.Interfaces;
 
 public interface IParticipationDomain
 {
     List<Participation> GetAll();
     public Participation GetById(int id);
-    bool Create(ParticipationData participationData);
-    bool Update(int id, ParticipationData participationData);
+    bool Create(Participation participationData);
+    bool Update(int id, Participation participationData);
     bool Delete(int id);
 }

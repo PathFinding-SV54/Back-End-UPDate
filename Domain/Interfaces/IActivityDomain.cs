@@ -1,13 +1,12 @@
-﻿using Infrastructure.DataClass;
-using Infrastructure.Model;
+﻿using Infrastructure.Model;
 
-namespace Domain;
+namespace Domain.Interfaces;
 
 public interface IActivityDomain
 {
     List<Activity> GetAll();
     public Activity GetById(int id);
-    bool Create(ActivityData activityData); 
-    bool Update(int id, ActivityData activityData );
+    bool Create(Activity activityData); 
+    bool Update(int id, Activity activityData );
     bool Delete(int id);
 }
