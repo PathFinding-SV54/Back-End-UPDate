@@ -1,13 +1,12 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.DataClass;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Infrastructure;
 
 public class ParticipationInfrastructure : IParticipationInfrastructure
 {
-    private UpdateDbContext _updateDbContext;
-    
+    private readonly UpdateDbContext _updateDbContext;
     public ParticipationInfrastructure(UpdateDbContext updateDbContext)
     {
         _updateDbContext = updateDbContext;
@@ -24,15 +23,13 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
             participation.IsActive && participation.Id == id);
     }
 
-    public bool Create(ParticipationData participationData)
+    public bool Create(Participation participationData)
     {
         try
         {
-            var participation = new Participation();
-            participation.ActivityId = participationData.ActivityId;
-            participation.IsActive = true;
+            participationData.IsActive = true;
 
-            _updateDbContext.Participations.Add(participation);
+            _updateDbContext.Participations.Add(participationData);
             _updateDbContext.SaveChanges();
 
             return true;
@@ -44,11 +41,17 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         }
     }
 
-    public bool Update(int id, ParticipationData participationData)
+    public bool Update(int id, Participation participationData)
     {
         try
         {
             var participation = _updateDbContext.Participations.Find(id);
+            if (participation == null)
+            {
+                Console.WriteLine("Participation doesn't exist");
+                return false;
+            }
+            
             participation.ActivityId = participationData.ActivityId;
 
             _updateDbContext.Participations.Update(participation);
@@ -66,6 +69,12 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
     public bool Delete(int id)
     {
         var participation = _updateDbContext.Participations.Find(id);
+        if (participation == null)
+        {
+            Console.WriteLine("Participation doesn't exist");
+            return false;
+        }
+
         participation.IsActive = false;
 
         _updateDbContext.Participations.Update(participation);
