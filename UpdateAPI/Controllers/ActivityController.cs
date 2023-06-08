@@ -1,28 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain;
-using Infrastructure;
-using Infrastructure.DataClass;
+using AutoMapper;
+using Domain.Interfaces;
 using Infrastructure.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using update.Input;
 
-namespace update
+namespace update.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ActivityController : ControllerBase
     {
         //Inyeccion
-        private IActivityInfrastructure _activityInfrastructure;
-        private IActivityDomain _activityDomain;
+        private readonly IActivityDomain _activityDomain;
+        private readonly IMapper _mapper;
 
-        public ActivityController(IActivityInfrastructure activityInfrastructure, IActivityDomain activityDomain)
+        public ActivityController(IActivityDomain activityDomain, IMapper mapper)
         {
-            _activityInfrastructure = activityInfrastructure;
             _activityDomain = activityDomain;
+            _mapper = mapper;
         }
         
         // GET: api/Activity
@@ -43,29 +38,18 @@ namespace update
 
         // POST: api/Activity
         [HttpPost]
-        public void Post([FromBody] ActivityData activity)
+        public void Post([FromBody] ActivityData activityData)
         {
-            /*if (ModelState.IsValid) //valida las condiciones del model 
-            {
-                Tutorial tutorial  = new Tutorial(){
-                Title= activity.Title
-                Description= activity.Description
-                Address= activity.Address
-                Date= activity.Date
-                }
-            }
-            else
-            {
-                StatusCode(400);
-            }*/
+            var activity = _mapper.Map<ActivityData, Activity>(activityData);
             _activityDomain.Create(activity);
         }
 
         // PUT: api/Activity/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ActivityData activity)
+        public void Put(int id, [FromBody] ActivityData activityData)
         {
-            _activityDomain.Update(id,activity);
+            var activity = _mapper.Map<ActivityData, Activity>(activityData);
+            _activityDomain.Update(id, activity);
         }
 
         // DELETE: api/Activity/5
