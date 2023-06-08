@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.DataClass;
+﻿namespace update.Input;
 
 public class ParticipationData
 {

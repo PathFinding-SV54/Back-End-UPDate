@@ -1,5 +1,5 @@
-﻿using Infrastructure;
-using Infrastructure.DataClass;
+﻿using Domain.Interfaces;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Domain;
@@ -23,12 +23,12 @@ public class ActivityDomain: IActivityDomain
         return _activityInfrastructure.GetById(id);
     }
 
-    public bool Create(ActivityData activityData)
+    public bool Create(Activity activityData)
     {
         return _activityInfrastructure.Create(activityData);
     }
 
-    public bool Update(int id, ActivityData activityData)
+    public bool Update(int id, Activity activityData)
     {
         return _activityInfrastructure.Update(id, activityData);
     }

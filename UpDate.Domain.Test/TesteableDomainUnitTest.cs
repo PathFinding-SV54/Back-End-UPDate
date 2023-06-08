@@ -1,6 +1,6 @@
 using Domain;
-using Infrastructure;
-using Infrastructure.DataClass;
+using Infrastructure.Interfaces;
+using Infrastructure.Model;
 
 namespace UpDate.Domain.Test;
 using Moq;
@@ -28,7 +28,7 @@ public class UnitTest1
     [Fact]
     public void Create_ValidActivity_ReturnSuccess()
     {
-        ActivityData activityData = new ActivityData()
+        Activity activityData = new Activity()
         {
             Title = "test1"
         };
@@ -46,7 +46,7 @@ public class UnitTest1
     [Fact]
     public void Create_InvalidActivity_ReturnError()
     {
-        ActivityData activityData = new ActivityData()
+        Activity activityData = new Activity()
         {
             Title = "test1"
         };
@@ -64,7 +64,7 @@ public class UnitTest1
     [Fact]
     public void Update_ValidActivity_ReturnSuccess()
     {
-        ActivityData activityData = new ActivityData()
+        Activity activityData = new Activity()
         {
             Title = "test1"
         };
@@ -82,7 +82,7 @@ public class UnitTest1
     [Fact]
     public void Update_InvalidActivity_ReturnError()
     {
-        ActivityData activityData = new ActivityData()
+        Activity activityData = new Activity()
         {
             Title = "test1"
         };
@@ -113,7 +113,7 @@ public class UnitTest1
     [Fact]
     public void Delete_InvalidActivity_ReturnError()
     {
-        ActivityData activityData = new ActivityData()
+        Activity activityData = new Activity()
         {
             Title = "test1"
         };

@@ -1,12 +1,12 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.DataClass;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Infrastructure;
 
 public class CommunityInfrastructure : ICommunityInfrastructure
 {
-    private UpdateDbContext _updateDbContext;
+    private readonly UpdateDbContext _updateDbContext;
     
     public CommunityInfrastructure(UpdateDbContext updateDbContext)
     {
@@ -23,16 +23,12 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         return _updateDbContext.Communities.Single(community => community.IsActive && community.Id == id);
     }
 
-    public bool Create(CommunityData communityData)
+    public bool Create(Community communityData)
     {
         try
         {
-            var community = new Community();
-            community.Name = communityData.Name;
-            community.Description = communityData.Description;
-            community.IsActive = true;
-            
-            _updateDbContext.Communities.Add(community);
+            communityData.IsActive = true;
+            _updateDbContext.Communities.Add(communityData);
             _updateDbContext.SaveChanges();
             return true;
         }
@@ -43,7 +39,7 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         }
     }
 
-    public bool Update(int id, CommunityData communityData)
+    public bool Update(int id, Community communityData)
     {
         try
         {

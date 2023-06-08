@@ -1,12 +1,12 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.DataClass;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Infrastructure;
 
 public class ActivityInfrastructure : IActivityInfrastructure
 {
-    private UpdateDbContext _updateDbContext;
+    private readonly UpdateDbContext _updateDbContext;
 
     public ActivityInfrastructure(UpdateDbContext updateDbContext)
     {
@@ -21,18 +21,13 @@ public class ActivityInfrastructure : IActivityInfrastructure
     {
         return _updateDbContext.Activities.Single(activity => activity.IsActive && activity.Id == id);
     }
-    public bool Create(ActivityData activityData)
+    public bool Create(Activity activityData)
     {
         try
         {
-            Activity activity = new Activity();
-            activity.Title = activityData.Title;
-            activity.Description = activityData.Description;
-            activity.Address = activityData.Address;
-            activity.Date = activityData.Date;
-            activity.IsActive = true;
+            activityData.IsActive = true;
 
-            _updateDbContext.Activities.Add(activity);
+            _updateDbContext.Activities.Add(activityData);
             _updateDbContext.SaveChanges();
             return true;
         }
@@ -42,7 +37,7 @@ public class ActivityInfrastructure : IActivityInfrastructure
         }
     }
 
-    public bool Update(int id, ActivityData activityData)
+    public bool Update(int id, Activity activityData)
     {
         try
         {
@@ -52,11 +47,8 @@ public class ActivityInfrastructure : IActivityInfrastructure
             activity.Title = activityData.Title;
             activity.Description = activityData.Description;
             activity.Address = activityData.Address;
-            activity.Date = activityData.Date;
 
             _updateDbContext.Activities.Update(activity); //modifco
-
-
             _updateDbContext.SaveChanges();
 
             return true;

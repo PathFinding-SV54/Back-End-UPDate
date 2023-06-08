@@ -1,8 +1,8 @@
 ﻿using Infrastructure.Model;
 
-namespace Domain.Interfaces;
+namespace Infrastructure.Interfaces;
 
-public interface IParticipationDomain
+public interface IParticipationInfrastructure
 {
     List<Participation> GetAll();
     public Participation GetById(int id);

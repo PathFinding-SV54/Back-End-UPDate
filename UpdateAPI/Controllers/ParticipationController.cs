@@ -1,24 +1,22 @@
-﻿using Domain;
-using Infrastructure;
-using Infrastructure.DataClass;
+﻿using AutoMapper;
+using Domain.Interfaces;
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Mvc;
+using update.Input;
 
-namespace update;
+namespace update.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 public class ParticipationController : ControllerBase
 {
-    private IParticipationInfrastructure _participationInfrastructure;
-    private IParticipationDomain _participationDomain;
+    private readonly IParticipationDomain _participationDomain;
+    private readonly IMapper _mapper;
 
-
-    public ParticipationController(IParticipationInfrastructure participationInfrastructure,
-        IParticipationDomain participationDomain)
+    public ParticipationController(IParticipationDomain participationDomain, IMapper mapper)
     {
-        _participationInfrastructure = participationInfrastructure;
         _participationDomain = participationDomain;
+        _mapper = mapper;
     }
 
     //GET : api/Participation
@@ -38,13 +36,15 @@ public class ParticipationController : ControllerBase
     [HttpPost]
     public void Post([FromBody] ParticipationData participationData)
     {
-        _participationDomain.Create(participationData);
+        var participation = _mapper.Map<ParticipationData, Participation>(participationData);
+        _participationDomain.Create(participation);
     }
 
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] ParticipationData participationData)
     {
-        _participationDomain.Update(id, participationData);
+        var participation = _mapper.Map<ParticipationData, Participation>(participationData);
+        _participationDomain.Update(id, participation);
     }
 
     [HttpDelete("{id}")]

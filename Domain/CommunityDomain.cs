@@ -1,5 +1,5 @@
-﻿using Infrastructure;
-using Infrastructure.DataClass;
+﻿using Domain.Interfaces;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Domain;
@@ -23,12 +23,12 @@ public class CommunityDomain : ICommunityDomain
         return _communityInfrastructure.GetById(id);
     }
 
-    public bool Create(CommunityData communityData)
+    public bool Create(Community communityData)
     {
         return _communityInfrastructure.Create(communityData);
     }
 
-    public bool Update(int id, CommunityData communityData)
+    public bool Update(int id, Community communityData)
     {
         return _communityInfrastructure.Update(id, communityData);
     }

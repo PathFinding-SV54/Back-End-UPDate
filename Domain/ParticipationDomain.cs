@@ -1,5 +1,5 @@
-﻿using Infrastructure;
-using Infrastructure.DataClass;
+﻿using Domain.Interfaces;
+using Infrastructure.Interfaces;
 using Infrastructure.Model;
 
 namespace Domain;
@@ -23,12 +23,12 @@ public class ParticipationDomain : IParticipationDomain
         return _participationInfrastructure.GetById(id);
     }
 
-    public bool Create(ParticipationData participationData)
+    public bool Create(Participation participationData)
     {
         return _participationInfrastructure.Create(participationData);
     }
 
-    public bool Update(int id, ParticipationData participationData)
+    public bool Update(int id, Participation participationData)
     {
         return _participationInfrastructure.Update(id, participationData);
     }
