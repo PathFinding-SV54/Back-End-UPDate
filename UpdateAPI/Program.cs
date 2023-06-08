@@ -19,6 +19,8 @@ builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 builder.Services.AddScoped<ICommunityInfrastructure, CommunityInfrastructure>();
 builder.Services.AddScoped<ICommunityDomain, CommunityDomain>();
 
+builder.Services.AddScoped<IParticipationInfrastructure, ParticipationInfrastructure>();
+builder.Services.AddScoped<IParticipationDomain, ParticipationDomain>();
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
