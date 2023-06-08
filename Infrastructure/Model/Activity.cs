@@ -6,7 +6,7 @@ public class Activity
     public string Title { get; set; }
     public string Description { get; set; }
     public string Address { get; set; }
-    public DateTime Date { get; set; }
+    public DateTime CreatedAt { get; set; }
     
     public  bool IsActive { get; set; }
     
