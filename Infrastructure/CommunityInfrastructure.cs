@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Interfaces;
 using Infrastructure.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -13,23 +14,23 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         _updateDbContext = updateDbContext;
     }
 
-    public List<Community> GetAll()
+    public async Task<List<Community>> GetAll()
     {
-        return _updateDbContext.Communities.Where(community => community.IsActive).ToList();
+        return await _updateDbContext.Communities.Where(community => community.IsActive).ToListAsync();
     }
 
-    public Community GetById(int id)
+    public async Task<Community> GetById(int id)
     {
-        return _updateDbContext.Communities.Single(community => community.IsActive && community.Id == id);
+        return await _updateDbContext.Communities.SingleAsync(community => community.IsActive && community.Id == id);
     }
 
-    public bool Create(Community communityData)
+    public async Task<bool> Create(Community communityData)
     {
         try
         {
             communityData.IsActive = true;
-            _updateDbContext.Communities.Add(communityData);
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.Communities.AddAsync(communityData);
+            await _updateDbContext.SaveChangesAsync();
             return true;
         }
         catch (Exception e)
@@ -39,17 +40,17 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         }
     }
 
-    public bool Update(int id, Community communityData)
+    public async Task<bool> Update(int id, Community communityData)
     {
         try
         {
-            var community = _updateDbContext.Communities.Find(id);
+            var community = await _updateDbContext.Communities.FindAsync(id);
 
             community.Name = communityData.Name;
             community.Description = communityData.Description;
 
             _updateDbContext.Communities.Update(community);
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.SaveChangesAsync();
 
             return true;
         }
@@ -60,13 +61,13 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         }
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        var community = _updateDbContext.Communities.Find(id);
+        var community = await _updateDbContext.Communities.FindAsync(id);
         community.IsActive = false;
 
         _updateDbContext.Communities.Update(community);
-        _updateDbContext.SaveChanges();
+        await _updateDbContext.SaveChangesAsync();
         
         return true;
     }
