@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Context;
+using Infrastructure.DataClass;
 using Infrastructure.Model;
 
 namespace Infrastructure;
@@ -23,7 +24,7 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
             participation.IsActive && participation.Id == id);
     }
 
-    public bool Create(Participation participationData)
+    public bool Create(ParticipationData participationData)
     {
         try
         {
@@ -43,7 +44,7 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         }
     }
 
-    public bool Update(int id, Participation participationData)
+    public bool Update(int id, ParticipationData participationData)
     {
         try
         {
