@@ -20,36 +20,39 @@ public class CommunityController : ControllerBase
     
     //GET : api/Community
     [HttpGet]
-    public List<Community> Get()
+    public async Task<List<Community>> Get()
     {
-        return _communityDomain.GetAll();
+        return await _communityDomain.GetAll();
     }
     
     //GET : api/Community/1
     [HttpGet("{id}", Name = "GetCommunity")]
-    public Community Get(int id)
+    public async Task<Community> Get(int id)
     {
-        return _communityDomain.GetById(id);
+        return await _communityDomain.GetById(id);
     }
 
     [HttpPost]
-    public void Post([FromBody] CommunityData communityData)
+    public async Task<IActionResult> Post([FromBody] CommunityData communityData)
     {
         var community = _mapper.Map<CommunityData, Community>(communityData);
-        _communityDomain.Create(community);
+        await _communityDomain.Create(community);
+        return Ok(community);
     }
     
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] CommunityData communityData)
+    public async Task<IActionResult> Put(int id, [FromBody] CommunityData communityData)
     {
         var community = _mapper.Map<CommunityData, Community>(communityData);
-        _communityDomain.Update(id, community);
+        await _communityDomain.Update(id, community);
+        return Ok(community);
     }
 
     // DELETE: api/Community/1
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        _communityDomain.Delete(id);
+        await _communityDomain.Delete(id);
+        return Ok();
     }
 }

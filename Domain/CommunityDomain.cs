@@ -13,28 +13,28 @@ public class CommunityDomain : ICommunityDomain
         _communityInfrastructure = communityInfrastructure;
     }
 
-    public List<Community> GetAll()
+    public async Task<List<Community>> GetAll()
     {
-        return _communityInfrastructure.GetAll();
+        return await _communityInfrastructure.GetAll();
     }
 
-    public Community GetById(int id)
+    public async Task<Community> GetById(int id)
     {
-        return _communityInfrastructure.GetById(id);
+        return await _communityInfrastructure.GetById(id);
     }
 
-    public bool Create(Community communityData)
+    public async Task<bool> Create(Community communityData)
     {
-        return _communityInfrastructure.Create(communityData);
+        return await _communityInfrastructure.Create(communityData);
     }
 
-    public bool Update(int id, Community communityData)
+    public async Task<bool> Update(int id, Community communityData)
     {
-        return _communityInfrastructure.Update(id, communityData);
+        return await _communityInfrastructure.Update(id, communityData);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        return _communityInfrastructure.Delete(id);
+        return await _communityInfrastructure.Delete(id);
     }
 }
