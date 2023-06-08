@@ -13,9 +13,8 @@ public class UpdateDbContext :DbContext
     {
     }
     
-    public DbSet<Activity> Activities { get; set; }
+    public  DbSet<Activity> Activities { get; set; }
     public DbSet<Community> Communities { get; set; }
-    public DbSet<University> University { get; set; }
 
     public DbSet<Participation> Participations { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,12 +46,6 @@ public class UpdateDbContext :DbContext
         builder.Entity<Community>().Property(c => c.Description).IsRequired().HasMaxLength(500);
         builder.Entity<Community>().Property(c => c.CreatedAt).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Community>().Property(c => c.IsActive).IsRequired();
-
-        builder.Entity<University>().ToTable("university");
-        builder.Entity<University>().HasKey(p => p.Id);
-        builder.Entity<University>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<University>().Property(c => c.Name).IsRequired().HasMaxLength(30);
-        builder.Entity<University>().Property(c => c.WebSite).IsRequired().HasMaxLength(50);
 
         builder.Entity<Participation>().ToTable("participations");
         builder.Entity<Participation>().HasKey(p => p.Id);
