@@ -34,10 +34,10 @@ public class UpdateDbContext :DbContext
         builder.Entity<Activity>().ToTable("activities");
         builder.Entity<Activity>().HasKey(p => p.Id);
         builder.Entity<Activity>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Activity>().Property(c => c.Title).HasMaxLength(60);
-        builder.Entity<Activity>().Property(c => c.Description).HasMaxLength(240);
-        builder.Entity<Activity>().Property(c => c.Address).HasMaxLength(60);
-        builder.Entity<Activity>().Property(c => c.Date).HasMaxLength(20);
+        builder.Entity<Activity>().Property(c => c.Title).IsRequired().HasMaxLength(60);
+        builder.Entity<Activity>().Property(c => c.Description).IsRequired().HasMaxLength(240);
+        builder.Entity<Activity>().Property(c => c.Address).IsRequired().HasMaxLength(60);
+        builder.Entity<Activity>().Property(c => c.CreatedAt).IsRequired().ValueGeneratedOnAdd();
 
         builder.Entity<Community>().ToTable("communities");
         builder.Entity<Community>().HasKey(p => p.Id);
