@@ -1,7 +1,10 @@
 using Domain;
+using Domain.Interfaces;
 using Infrastructure;
 using Infrastructure.Context;
+using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using update.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +44,11 @@ builder.Services.AddDbContext<UpdateDbContext>(
                 errorNumbersToAdd: null)
         );
     });
+
+builder.Services.AddAutoMapper(
+    typeof(ModelToResponse),
+    typeof(InputToModel)
+);
 
 var app = builder.Build();
 
