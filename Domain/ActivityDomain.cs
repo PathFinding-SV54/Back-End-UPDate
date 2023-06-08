@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using Infrastructure;
+﻿using Infrastructure;
 using Infrastructure.DataClass;
 using Infrastructure.Model;
 
