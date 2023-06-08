@@ -3,6 +3,7 @@
 public class Participation
 {
     public int Id { get; set; }
+    public bool IsActive { get; set; }
     
     //Relationship with Activity
     public int ActivityId { get; set; }
