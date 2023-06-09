@@ -22,41 +22,44 @@ namespace update.Controllers
         
         // GET: api/Activity
         [HttpGet]
-        public List<Activity> Get()
+        public async Task<List<Activity>> Get()
         {
             //filter data
             //
-            return _activityDomain.GetAll();
+            return await _activityDomain.GetAll();
         }
 
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "GetActivity")]
-        public Activity Get(int id)
+        public async Task<Activity> Get(int id)
         {
-            return _activityDomain.GetById(id);
+            return await _activityDomain.GetById(id);
         }
 
         // POST: api/Activity
         [HttpPost]
-        public void Post([FromBody] ActivityData activityData)
+        public async Task<IActionResult> Post([FromBody] ActivityData activityData)
         {
             var activity = _mapper.Map<ActivityData, Activity>(activityData);
-            _activityDomain.Create(activity);
+            await _activityDomain.Create(activity);
+            return Ok(activity);
         }
 
         // PUT: api/Activity/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ActivityData activityData)
+        public async Task<IActionResult> Put(int id, [FromBody] ActivityData activityData)
         {
             var activity = _mapper.Map<ActivityData, Activity>(activityData);
-            _activityDomain.Update(id, activity);
+            await _activityDomain.Update(id, activity);
+            return Ok(activity);
         }
 
         // DELETE: api/Activity/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _activityDomain.Delete(id);
+            await _activityDomain.Delete(id);
+            return Ok();
         }
     }
 }

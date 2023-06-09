@@ -6,35 +6,35 @@ namespace Domain;
 
 public class ActivityDomain: IActivityDomain
 {
-    private IActivityInfrastructure _activityInfrastructure;
+    private readonly IActivityInfrastructure _activityInfrastructure;
 
     public ActivityDomain(IActivityInfrastructure activityInfrastructure)
     {
         _activityInfrastructure = activityInfrastructure;
     }
 
-    public List<Activity> GetAll()
+    public async Task<List<Activity>> GetAll()
     {
-        return _activityInfrastructure.GetAll();
+        return await _activityInfrastructure.GetAll();
     }
 
-    public Activity GetById(int id)
+    public async Task<Activity> GetById(int id)
     {
-        return _activityInfrastructure.GetById(id);
+        return await _activityInfrastructure.GetById(id);
     }
 
-    public bool Create(Activity activityData)
+    public async Task<bool> Create(Activity activityData)
     {
-        return _activityInfrastructure.Create(activityData);
+        return await _activityInfrastructure.Create(activityData);
     }
 
-    public bool Update(int id, Activity activityData)
+    public async Task<bool> Update(int id, Activity activityData)
     {
-        return _activityInfrastructure.Update(id, activityData);
+        return await _activityInfrastructure.Update(id, activityData);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        return _activityInfrastructure.Delete(id);
+        return await _activityInfrastructure.Delete(id);
     }
 }

@@ -4,9 +4,9 @@ namespace Domain.Interfaces;
 
 public interface IActivityDomain
 {
-    List<Activity> GetAll();
-    public Activity GetById(int id);
-    bool Create(Activity activityData); 
-    bool Update(int id, Activity activityData );
-    bool Delete(int id);
+    Task<List<Activity>> GetAll();
+    public Task<Activity> GetById(int id);
+    Task<bool> Create(Activity activityData); 
+    Task<bool> Update(int id, Activity activityData );
+    Task<bool> Delete(int id);
 }
