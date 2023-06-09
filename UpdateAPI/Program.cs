@@ -28,6 +28,9 @@ builder.Services.AddScoped<IParticipationDomain, ParticipationDomain>();
 builder.Services.AddScoped<ILocationInfrastructure, LocationInfrastructure>();
 builder.Services.AddScoped<ILocationDomain, LocationDomain>();
 
+builder.Services.AddScoped<IRoleInfrastructure, RoleInfrastructure>();
+builder.Services.AddScoped<IRoleDomain, RoleDomain>();
+
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
