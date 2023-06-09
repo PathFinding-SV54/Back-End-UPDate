@@ -11,5 +11,6 @@ public class ModelToResponse : Profile
         CreateMap<CommunityData, Community>();
         CreateMap<ActivityData, Activity>();
         CreateMap<Participation, ParticipationData>();
+        CreateMap<Location, LocationData>();
     }
 }
