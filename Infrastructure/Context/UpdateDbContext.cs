@@ -50,6 +50,8 @@ public class UpdateDbContext :DbContext
         builder.Entity<Participation>().ToTable("participations");
         builder.Entity<Participation>().HasKey(p => p.Id);
         builder.Entity<Participation>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Participation>().Property(p => p.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Participation>().Property(p => p.IsActive).IsRequired();
         //Relationship One to Many with Activity
         builder.Entity<Participation>()
             .HasOne<Activity>(s => s.Activity)

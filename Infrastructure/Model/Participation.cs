@@ -1,10 +1,7 @@
 ﻿namespace Infrastructure.Model;
 
-public class Participation
+public class Participation : BaseModel
 {
-    public int Id { get; set; }
-    public bool IsActive { get; set; }
-    
     //Relationship with Activity
     public int ActivityId { get; set; }
     public Activity Activity { get; set; }
