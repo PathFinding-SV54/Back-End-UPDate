@@ -13,28 +13,28 @@ public class ParticipationDomain : IParticipationDomain
         _participationInfrastructure = participationInfrastructure;
     }
 
-    public List<Participation> GetAll()
+    public async Task<List<Participation>> GetAll()
     {
-        return _participationInfrastructure.GetAll();
+        return await _participationInfrastructure.GetAll();
     }
 
-    public Participation GetById(int id)
+    public async Task<Participation> GetById(int id)
     {
-        return _participationInfrastructure.GetById(id);
+        return await _participationInfrastructure.GetById(id);
     }
 
-    public bool Create(Participation participationData)
+    public async Task<bool> Create(Participation participationData)
     {
-        return _participationInfrastructure.Create(participationData);
+        return await _participationInfrastructure.Create(participationData);
     }
 
-    public bool Update(int id, Participation participationData)
+    public async Task<bool> Update(int id, Participation participationData)
     {
-        return _participationInfrastructure.Update(id, participationData);
+        return await _participationInfrastructure.Update(id, participationData);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        return _participationInfrastructure.Delete(id);
+        return await _participationInfrastructure.Delete(id);
     }
 }

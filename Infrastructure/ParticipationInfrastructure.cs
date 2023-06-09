@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Interfaces;
 using Infrastructure.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -12,25 +13,25 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         _updateDbContext = updateDbContext;
     }
 
-    public List<Participation> GetAll()
+    public async Task<List<Participation>> GetAll()
     {
-        return _updateDbContext.Participations.Where(participation => participation.IsActive).ToList();
+        return await _updateDbContext.Participations.Where(participation => participation.IsActive).ToListAsync();
     }
 
-    public Participation GetById(int id)
+    public async Task<Participation> GetById(int id)
     {
-        return _updateDbContext.Participations.Single(participation =>
-            participation.IsActive && participation.Id == id);
+        return await _updateDbContext.Participations.SingleAsync(participation =>
+                participation.IsActive && participation.Id == id);
     }
 
-    public bool Create(Participation participationData)
+    public async Task<bool> Create(Participation participationData)
     {
         try
         {
             participationData.IsActive = true;
 
-            _updateDbContext.Participations.Add(participationData);
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.Participations.AddAsync(participationData);
+            await _updateDbContext.SaveChangesAsync();
 
             return true;
         }
@@ -41,11 +42,11 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         }
     }
 
-    public bool Update(int id, Participation participationData)
+    public async Task<bool> Update(int id, Participation participationData)
     {
         try
         {
-            var participation = _updateDbContext.Participations.Find(id);
+            var participation = await _updateDbContext.Participations.FindAsync(id);
             if (participation == null)
             {
                 Console.WriteLine("Participation doesn't exist");
@@ -55,7 +56,7 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
             participation.ActivityId = participationData.ActivityId;
 
             _updateDbContext.Participations.Update(participation);
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.SaveChangesAsync();
 
             return true;
         }
@@ -66,9 +67,9 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         }
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        var participation = _updateDbContext.Participations.Find(id);
+        var participation = await _updateDbContext.Participations.FindAsync(id);
         if (participation == null)
         {
             Console.WriteLine("Participation doesn't exist");
@@ -78,7 +79,7 @@ public class ParticipationInfrastructure : IParticipationInfrastructure
         participation.IsActive = false;
 
         _updateDbContext.Participations.Update(participation);
-        _updateDbContext.SaveChanges();
+        await _updateDbContext.SaveChangesAsync();
 
         return true;
     }

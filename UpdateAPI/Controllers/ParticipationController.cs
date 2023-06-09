@@ -21,35 +21,38 @@ public class ParticipationController : ControllerBase
 
     //GET : api/Participation
     [HttpGet]
-    public List<Participation> Get()
+    public async Task<List<Participation>> Get()
     {
-        return _participationDomain.GetAll();
+        return await _participationDomain.GetAll();
     }
 
     //GET : api/Participation/1
     [HttpGet("{id}", Name = "GetParticipation")]
-    public Participation Get(int id)
+    public async Task<Participation> Get(int id)
     {
-        return _participationDomain.GetById(id);
+        return await _participationDomain.GetById(id);
     }
 
     [HttpPost]
-    public void Post([FromBody] ParticipationData participationData)
+    public async Task<IActionResult> Post([FromBody] ParticipationData participationData)
     {
         var participation = _mapper.Map<ParticipationData, Participation>(participationData);
-        _participationDomain.Create(participation);
+        await _participationDomain.Create(participation);
+        return Ok(participation);
     }
 
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] ParticipationData participationData)
+    public async Task<IActionResult> Put(int id, [FromBody] ParticipationData participationData)
     {
         var participation = _mapper.Map<ParticipationData, Participation>(participationData);
-        _participationDomain.Update(id, participation);
+        await _participationDomain.Update(id, participation);
+        return Ok(participation);
     }
 
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        _participationDomain.Delete(id);
+        await _participationDomain.Delete(id);
+        return Ok();
     }
 }
