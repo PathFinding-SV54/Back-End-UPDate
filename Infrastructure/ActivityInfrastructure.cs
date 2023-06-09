@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Interfaces;
 using Infrastructure.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -13,22 +14,22 @@ public class ActivityInfrastructure : IActivityInfrastructure
         _updateDbContext = updateDbContext;
     }
 
-    public List<Activity> GetAll()
+    public async Task<List<Activity>> GetAll()
     {
-        return _updateDbContext.Activities.Where(activity => activity.IsActive).ToList();
+        return await _updateDbContext.Activities.Where(activity => activity.IsActive).ToListAsync();
     }
-    public Activity GetById(int id)
+    public async Task<Activity> GetById(int id)
     {
-        return _updateDbContext.Activities.Single(activity => activity.IsActive && activity.Id == id);
+        return await _updateDbContext.Activities.SingleAsync(activity => activity.IsActive && activity.Id == id);
     }
-    public bool Create(Activity activityData)
+    public async Task<bool> Create(Activity activityData)
     {
         try
         {
             activityData.IsActive = true;
 
-            _updateDbContext.Activities.Add(activityData);
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.Activities.AddAsync(activityData);
+            await _updateDbContext.SaveChangesAsync();
             return true;
         }
         catch (Exception exception)
@@ -37,19 +38,19 @@ public class ActivityInfrastructure : IActivityInfrastructure
         }
     }
 
-    public bool Update(int id, Activity activityData)
+    public async Task<bool> Update(int id, Activity activityData)
     {
         try
         {
             //using (var transaction = _updateDbContext.Database.BeginTransaction()){}
-            var activity = _updateDbContext.Activities.Find(id); //obtengo
+            var activity = await _updateDbContext.Activities.FindAsync(id); //obtengo
 
             activity.Title = activityData.Title;
             activity.Description = activityData.Description;
             activity.Address = activityData.Address;
 
             _updateDbContext.Activities.Update(activity); //modifco
-            _updateDbContext.SaveChanges();
+            await _updateDbContext.SaveChangesAsync();
 
             return true;
         }
@@ -60,9 +61,9 @@ public class ActivityInfrastructure : IActivityInfrastructure
 
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        var activity = _updateDbContext.Activities.Find(id); //obtengo
+        var activity = await _updateDbContext.Activities.FindAsync(id); //obtengo
 
         //_learningCenterDbContext.Tutorials.Remove(tutorial);
 
@@ -70,7 +71,7 @@ public class ActivityInfrastructure : IActivityInfrastructure
         
         _updateDbContext.Activities.Update(activity); //modifco
         
-        _updateDbContext.SaveChanges();
+        await _updateDbContext.SaveChangesAsync();
 
         return true;
     }
