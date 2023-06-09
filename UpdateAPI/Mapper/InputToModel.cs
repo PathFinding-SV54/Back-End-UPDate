@@ -12,5 +12,6 @@ public class InputToModel : Profile
         CreateMap<ActivityData, Activity>();
         CreateMap<ParticipationData, Participation>();
         CreateMap<LocationData, Location>();
+        CreateMap<RoleData, Role>();
     }
 }

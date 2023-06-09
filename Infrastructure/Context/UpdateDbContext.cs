@@ -17,6 +17,7 @@ public class UpdateDbContext :DbContext
     public DbSet<Community> Communities { get; set; }
     public DbSet<Participation> Participations { get; set; }
     public DbSet<Location> Locations { get; set; }
+    public DbSet<Role> Roles { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -71,5 +72,12 @@ public class UpdateDbContext :DbContext
         builder.Entity<Location>().Property(l => l.Description).IsRequired().HasMaxLength(60);
         builder.Entity<Location>().Property(l => l.CreatedAt).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Location>().Property(l => l.IsActive).IsRequired();
+
+        builder.Entity<Role>().ToTable("roles");
+        builder.Entity<Role>().HasKey(r => r.Id);
+        builder.Entity<Role>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(15);
+        builder.Entity<Role>().Property(r => r.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Role>().Property(r => r.IsActive).IsRequired();
     }
 }
