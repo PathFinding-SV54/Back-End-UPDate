@@ -15,7 +15,7 @@ public class UniversityInfrastructure : IUniversityInfrastructure
 
     public List<University> GetAll()
     {
-        return _updateDbContext.Universities.Where(university => university.isActive).ToList();
+        return _updateDbContext.Universities.Where(university => university.IsActive).ToList();
     }
 
     public University GetById(int id)
@@ -27,7 +27,7 @@ public class UniversityInfrastructure : IUniversityInfrastructure
     {
         try
         {
-            universityData.isActive = true;
+            universityData.IsActive = true;
             _updateDbContext.Universities.Add(universityData);
             _updateDbContext.SaveChanges();
             return true;
@@ -62,7 +62,7 @@ public class UniversityInfrastructure : IUniversityInfrastructure
     {
         var university = _updateDbContext.Universities.Find(id);
 
-        university.isActive = false;
+        university.IsActive = false;
 
         _updateDbContext.Universities.Update(university);
         _updateDbContext.SaveChanges();

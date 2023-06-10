@@ -8,7 +8,7 @@ public class University
     
     public string WebSite { get; set; }
     
-    public bool isActive { get; set; }
+    public bool IsActive { get; set; }
     
     public ICollection<User> Users { get; set; }
 }

@@ -25,7 +25,7 @@ public class UpdateDbContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10623949;Pwd=iQ8auZS7z7;Database=sql10623949;", serverVersion);
+            optionsBuilder.UseMySql("SServer=localhost,3306;Uid=root;Pwd=rinzler;Database=Update", serverVersion);
         }
     }
     
@@ -72,6 +72,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<User>().Property(p => p.Email).IsRequired().HasMaxLength(40);
         builder.Entity<User>().Property(p => p.Password).IsRequired().HasMaxLength(40);
         builder.Entity<User>().Property(p => p.Gender).IsRequired();
+        builder.Entity<User>().Property(p => p.IsActive).IsRequired();
 
         builder.Entity<User>()
             .HasOne<University>(c => c.University)
@@ -84,6 +85,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<University>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<University>().Property(p => p.Name).IsRequired().HasMaxLength(50);
         builder.Entity<University>().Property(p => p.WebSite).IsRequired().HasMaxLength(50);
+        builder.Entity<University>().Property(p => p.IsActive).IsRequired();
 
     }
 }

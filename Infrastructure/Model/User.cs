@@ -19,6 +19,8 @@ public class User
     
     public int UniversityId { get; set; }
     
+
+    public bool IsActive { get; set; }
     public University University { get; set; }
     
 }

@@ -25,10 +25,8 @@ builder.Services.AddScoped<ICommunityDomain, CommunityDomain>();
 builder.Services.AddScoped<IParticipationInfrastructure, ParticipationInfrastructure>();
 builder.Services.AddScoped<IParticipationDomain, ParticipationDomain>();
 
-/*
-builder.Services.AddScoped<IUserInfrastructure,UserInfrastructure>();
+builder.Services.AddScoped<IUserInfrastructure, UserInfrastructure>();
 builder.Services.AddScoped<IUserDomain, UserDomain>();
-*/
 
 builder.Services.AddScoped<IUniversityInfrastructure, UniversityInfrastructure>();
 builder.Services.AddScoped<IUniversityDomain, UniversityDomain>();
