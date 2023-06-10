@@ -25,7 +25,7 @@ public class UpdateDbContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("SServer=localhost,3306;Uid=root;Pwd=rinzler;Database=Update", serverVersion);
+            optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10623949;Pwd=iQ8auZS7z7;Database=sql10623949;", serverVersion);
         }
     }
     
