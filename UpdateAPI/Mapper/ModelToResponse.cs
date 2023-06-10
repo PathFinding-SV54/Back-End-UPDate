@@ -8,8 +8,8 @@ public class ModelToResponse : Profile
 {
     public ModelToResponse()
     {
-        CreateMap<CommunityData, Community>();
-        CreateMap<ActivityData, Activity>();
+        CreateMap<Community, CommunityData>();
+        CreateMap<Activity, ActivityData>();
         CreateMap<Participation, ParticipationData>();
         CreateMap<Location, LocationData>();
         CreateMap<Role, RoleData>();

@@ -46,6 +46,9 @@ public class CommunityInfrastructure : ICommunityInfrastructure
         {
             var community = await _updateDbContext.Communities.FindAsync(id);
 
+            if (community == null)
+                return false;
+            
             community.Name = communityData.Name;
             community.Description = communityData.Description;
 
@@ -64,6 +67,10 @@ public class CommunityInfrastructure : ICommunityInfrastructure
     public async Task<bool> Delete(int id)
     {
         var community = await _updateDbContext.Communities.FindAsync(id);
+        
+        if (community == null)
+            return false;
+        
         community.IsActive = false;
 
         _updateDbContext.Communities.Update(community);
