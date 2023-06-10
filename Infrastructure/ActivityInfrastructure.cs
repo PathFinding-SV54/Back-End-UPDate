@@ -42,14 +42,16 @@ public class ActivityInfrastructure : IActivityInfrastructure
     {
         try
         {
-            //using (var transaction = _updateDbContext.Database.BeginTransaction()){}
             var activity = await _updateDbContext.Activities.FindAsync(id); //obtengo
 
+            if (activity == null)
+                return false;
+            
             activity.Title = activityData.Title;
             activity.Description = activityData.Description;
             activity.Address = activityData.Address;
 
-            _updateDbContext.Activities.Update(activity); //modifco
+            _updateDbContext.Activities.Update(activity); //modifico
             await _updateDbContext.SaveChangesAsync();
 
             return true;
@@ -65,11 +67,12 @@ public class ActivityInfrastructure : IActivityInfrastructure
     {
         var activity = await _updateDbContext.Activities.FindAsync(id); //obtengo
 
-        //_learningCenterDbContext.Tutorials.Remove(tutorial);
-
+        if (activity == null)
+            return false;
+        
         activity.IsActive = false;
         
-        _updateDbContext.Activities.Update(activity); //modifco
+        _updateDbContext.Activities.Update(activity); //modifico
         
         await _updateDbContext.SaveChangesAsync();
 
