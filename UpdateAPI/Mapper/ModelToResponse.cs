@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using update.Input;
 using Infrastructure.Model;
+using update.Response;
 
 namespace update.Mapper;
 
@@ -13,5 +14,6 @@ public class ModelToResponse : Profile
         CreateMap<Participation, ParticipationData>();
         CreateMap<Location, LocationData>();
         CreateMap<Role, RoleData>();
+        CreateMap<User, UserResponse>();
     }
 }

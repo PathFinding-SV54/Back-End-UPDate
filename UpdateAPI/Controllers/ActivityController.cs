@@ -2,12 +2,14 @@ using AutoMapper;
 using Domain.Interfaces;
 using Infrastructure.Model;
 using Microsoft.AspNetCore.Mvc;
+using update.Filter;
 using update.Input;
 
 namespace update.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize("admin")]
     public class ActivityController : ControllerBase
     {
         //Inyeccion

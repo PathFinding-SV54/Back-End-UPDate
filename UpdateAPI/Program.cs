@@ -3,8 +3,11 @@ using Domain.Interfaces;
 using Infrastructure;
 using Infrastructure.Context;
 using Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using update.Mapper;
+using update.Middleware;
+using UserInfraestructure = Infrastructure.Model.UserInfraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //dependecy inyection
+builder.Services.AddScoped<IUserInfraestructure, UserInfraestructure>();
+builder.Services.AddScoped<IUserDomain, UserDomain>();
+
 builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();
 builder.Services.AddScoped<IActivityDomain, ActivityDomain>();
 
@@ -31,14 +37,25 @@ builder.Services.AddScoped<ILocationDomain, LocationDomain>();
 builder.Services.AddScoped<IRoleInfrastructure, RoleInfrastructure>();
 builder.Services.AddScoped<IRoleDomain, RoleDomain>();
 
+builder.Services.AddScoped<IEncryptDomain, EncryptDomain>();
+builder.Services.AddScoped<ITokenDomain, TokenDomain>();
+
+
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+});
+
+/*builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+}));*/
 
 builder.Services.AddDbContext<UpdateDbContext>(
     dbContextOptions =>
@@ -70,6 +87,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Cors
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 

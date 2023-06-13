@@ -18,12 +18,13 @@ public class UpdateDbContext :DbContext
     public DbSet<Participation> Participations { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<User> Users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10623949;Pwd=iQ8auZS7z7;Database=sql10623949;", serverVersion);
+            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=pass;Database=updatedb;", serverVersion);
         }
     }
     
@@ -38,7 +39,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<Activity>().Property(a => a.Title).IsRequired().HasMaxLength(60);
         builder.Entity<Activity>().Property(a => a.Description).IsRequired().HasMaxLength(240);
         builder.Entity<Activity>().Property(a => a.Address).IsRequired().HasMaxLength(60);
-        builder.Entity<Activity>().Property(a => a.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Activity>().Property(a => a.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Activity>().Property(a => a.IsActive).IsRequired();
         //Relationship One to Many with Location
         builder.Entity<Activity>()
@@ -51,13 +52,13 @@ public class UpdateDbContext :DbContext
         builder.Entity<Community>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Community>().Property(c => c.Name).IsRequired().HasMaxLength(30);
         builder.Entity<Community>().Property(c => c.Description).IsRequired().HasMaxLength(500);
-        builder.Entity<Community>().Property(c => c.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Community>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Community>().Property(c => c.IsActive).IsRequired();
 
         builder.Entity<Participation>().ToTable("participations");
         builder.Entity<Participation>().HasKey(p => p.Id);
         builder.Entity<Participation>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Participation>().Property(p => p.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Participation>().Property(p => p.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Participation>().Property(p => p.IsActive).IsRequired();
         //Relationship One to Many with Activity
         builder.Entity<Participation>()
@@ -70,14 +71,21 @@ public class UpdateDbContext :DbContext
         builder.Entity<Location>().HasKey(l => l.Id);
         builder.Entity<Location>().Property(l => l.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Location>().Property(l => l.Description).IsRequired().HasMaxLength(60);
-        builder.Entity<Location>().Property(l => l.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Location>().Property(l => l.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Location>().Property(l => l.IsActive).IsRequired();
 
         builder.Entity<Role>().ToTable("roles");
         builder.Entity<Role>().HasKey(r => r.Id);
         builder.Entity<Role>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(15);
-        builder.Entity<Role>().Property(r => r.CreatedAt).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Role>().Property(r => r.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Role>().Property(r => r.IsActive).IsRequired();
+        
+        builder.Entity<User>().ToTable("Users");
+        builder.Entity<User>().HasKey(p => p.Id);
+        builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(c => c.Username).IsRequired().HasMaxLength(60);
+        builder.Entity<User>().Property(c => c.Password).IsRequired().HasMaxLength(120);
+        builder.Entity<User>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
     }
 }
