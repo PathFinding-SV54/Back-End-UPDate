@@ -40,6 +40,8 @@ builder.Services.AddScoped<IRoleDomain, RoleDomain>();
 builder.Services.AddScoped<IEncryptDomain, EncryptDomain>();
 builder.Services.AddScoped<ITokenDomain, TokenDomain>();
 
+builder.Services.AddScoped<ICommunityMemberInfrastructure, CommunityMemberInfrastructure>();
+builder.Services.AddScoped<ICommunityMemberDomain, CommunityMemberDomain>();
 
 //Conexion a MySQL 
 var connectionString = builder.Configuration.GetConnectionString("upDateConnection");
