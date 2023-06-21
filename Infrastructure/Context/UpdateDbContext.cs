@@ -98,7 +98,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<CommunityMember>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<CommunityMember>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<CommunityMember>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
-        builder.Entity<CommunityMember>().Property(c => c.MembershipDate);
+        builder.Entity<CommunityMember>().Property(c => c.MembershipDate).IsRequired().ValueGeneratedOnAdd();
         //Relationship One to Many with Roles
         builder.Entity<CommunityMember>()
             .HasOne<Role>(c => c.Role)
