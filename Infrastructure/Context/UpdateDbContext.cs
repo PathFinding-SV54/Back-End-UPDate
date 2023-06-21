@@ -13,7 +13,7 @@ public class UpdateDbContext :DbContext
     {
     }
     
-    public  DbSet<Activity> Activities { get; set; }
+    public DbSet<Activity> Activities { get; set; }
     public DbSet<Community> Communities { get; set; }
     public DbSet<Participation> Participations { get; set; }
     public DbSet<Location> Locations { get; set; }
@@ -98,7 +98,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<CommunityMember>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<CommunityMember>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<CommunityMember>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
-        builder.Entity<CommunityMember>().Property(c => c.MembershipDate).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<CommunityMember>().Property(c => c.MembershipDate).IsRequired().HasDefaultValue(DateOnly.FromDateTime(DateTime.Now)).ValueGeneratedOnAdd();
         //Relationship One to Many with Roles
         builder.Entity<CommunityMember>()
             .HasOne<Role>(c => c.Role)
