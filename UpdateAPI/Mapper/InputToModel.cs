@@ -15,5 +15,6 @@ public class InputToModel : Profile
         CreateMap<RoleData, Role>();
         CreateMap<UserLoginInput, User>();
         CreateMap<UserInput, User>();
+        CreateMap<CommunityMemberData, CommunityMember>();
     }
 }
