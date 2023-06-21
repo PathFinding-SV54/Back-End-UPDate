@@ -3,11 +3,11 @@ using Domain.Interfaces;
 using Infrastructure;
 using Infrastructure.Context;
 using Infrastructure.Interfaces;
+using Infrastructure.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using update.Mapper;
 using update.Middleware;
-using UserInfraestructure = Infrastructure.Model.UserInfraestructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //dependecy inyection
-builder.Services.AddScoped<IUserInfraestructure, UserInfraestructure>();
+builder.Services.AddScoped<IUserInfrastructure, UserInfrastructure>();
 builder.Services.AddScoped<IUserDomain, UserDomain>();
 
 builder.Services.AddScoped<IActivityInfrastructure, ActivityInfrastructure>();

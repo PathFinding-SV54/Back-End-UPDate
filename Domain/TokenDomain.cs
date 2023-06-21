@@ -13,7 +13,7 @@ public class TokenDomain: ITokenDomain
     public string GenerateJwt(string username)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Constans.SecretKey);
+        var key = Encoding.ASCII.GetBytes(Constants.SecretKey);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
@@ -30,7 +30,7 @@ public class TokenDomain: ITokenDomain
             return null;
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Constans.SecretKey);
+        var key = Encoding.ASCII.GetBytes(Constants.SecretKey);
         try
         {
             tokenHandler.ValidateToken(token, new TokenValidationParameters

@@ -6,19 +6,19 @@ namespace Domain;
 
 public class UserDomain: IUserDomain
 {
-    private IUserInfraestructure _userInfraestructure;
-    private IEncryptDomain _encryptDomain;
-    private ITokenDomain _tokenDomain;
-    public UserDomain(IUserInfraestructure userInfraestructure,IEncryptDomain encryptDomain,ITokenDomain tokenDomain)
+    private readonly IUserInfrastructure _userInfrastructure;
+    private readonly IEncryptDomain _encryptDomain;
+    private readonly ITokenDomain _tokenDomain;
+    public UserDomain(IUserInfrastructure userInfrastructure,IEncryptDomain encryptDomain,ITokenDomain tokenDomain)
     {
-        _userInfraestructure = userInfraestructure;
+        _userInfrastructure = userInfrastructure;
         _encryptDomain = encryptDomain;
         _tokenDomain = tokenDomain;
     }
     
     public async Task<string> Login(User user)
     {
-        var foundUser = await _userInfraestructure.GetByUsername(user.Username);
+        var foundUser = await _userInfrastructure.GetByUsername(user.Username);
         
         if (_encryptDomain.Ecnrypt(user.Password) == foundUser.Password)
         {
@@ -31,11 +31,11 @@ public class UserDomain: IUserDomain
     public async Task<int> Signup(User user)
     {
         user.Password = _encryptDomain.Ecnrypt(user.Password);
-        return await _userInfraestructure.Signup(user);
+        return await _userInfrastructure.Signup(user);
     }
 
     public async Task<User> GetByUsername(string username)
     {
-        return  await _userInfraestructure.GetByUsername(username);
+        return  await _userInfrastructure.GetByUsername(username);
     }
 }
