@@ -45,7 +45,7 @@ public class CommunityMemberInfrastructure : ICommunityMemberInfrastructure
         var communityMember = await _updateDbContext.CommunityMembers.FindAsync(id);
         if (communityMember == null)
             return false;
-        communityMember.MembershipDate = new DateOnly();
+        communityMember.MembershipDate = DateOnly.FromDateTime(DateTime.Now);
         communityMember.CommunityId = communityMemberData.CommunityId;
         communityMember.RoleId = communityMemberData.RoleId;
         communityMember.DateUpdated = DateTime.Now;
