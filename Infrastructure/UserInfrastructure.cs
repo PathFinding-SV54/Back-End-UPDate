@@ -1,14 +1,15 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Interfaces;
+using Infrastructure.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Model;
+namespace Infrastructure;
 
-public class UserInfraestructure: IUserInfraestructure
+public class UserInfrastructure: IUserInfrastructure
 {
-    private UpdateDbContext _updateDbContext;
+    private readonly UpdateDbContext _updateDbContext;
 
-    public UserInfraestructure(UpdateDbContext updateDbContext)
+    public UserInfrastructure(UpdateDbContext updateDbContext)
     {
         _updateDbContext = updateDbContext;
     }
@@ -25,5 +26,5 @@ public class UserInfraestructure: IUserInfraestructure
         await _updateDbContext.SaveChangesAsync();
         return user.Id;
     }
-
+    
 }
