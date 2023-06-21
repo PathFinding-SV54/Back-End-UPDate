@@ -6,7 +6,7 @@ public class Participation : BaseModel
     public int ActivityId { get; set; }
     public Activity Activity { get; set; }
     
-    //Relationship with GroupMember--
-    //public int GroupMemberId { get; set; }
-    //public GroupMember GroupMember { get; set; }
+    //Relationship with CommunityMember
+    public int CommunityMemberId { get; set; }
+    public CommunityMember CommunityMember { get; set; }
 }
