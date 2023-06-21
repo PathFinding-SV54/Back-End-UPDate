@@ -13,12 +13,13 @@ public class UpdateDbContext :DbContext
     {
     }
     
-    public  DbSet<Activity> Activities { get; set; }
+    public DbSet<Activity> Activities { get; set; }
     public DbSet<Community> Communities { get; set; }
     public DbSet<Participation> Participations { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<CommunityMember> CommunityMembers { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -46,7 +47,7 @@ public class UpdateDbContext :DbContext
             .HasOne<Location>(a => a.Location)
             .WithMany(l => l.Activities)
             .HasForeignKey(a => a.LocationId);
-
+        
         builder.Entity<Community>().ToTable("communities");
         builder.Entity<Community>().HasKey(c => c.Id);
         builder.Entity<Community>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
@@ -65,7 +66,11 @@ public class UpdateDbContext :DbContext
             .HasOne<Activity>(p => p.Activity)
             .WithMany(a => a.Participations)
             .HasForeignKey(p => p.ActivityId);
-        //Relationship One to Many with GroupMembers--
+        //Relationship One to Many with GroupMembers
+        builder.Entity<Participation>()
+            .HasOne<CommunityMember>(p => p.CommunityMember)
+            .WithMany(c => c.Participations)
+            .HasForeignKey(p => p.CommunityMemberId);
 
         builder.Entity<Location>().ToTable("locations");
         builder.Entity<Location>().HasKey(l => l.Id);
@@ -80,12 +85,29 @@ public class UpdateDbContext :DbContext
         builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(15);
         builder.Entity<Role>().Property(r => r.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Role>().Property(r => r.IsActive).IsRequired();
-        
-        builder.Entity<User>().ToTable("Users");
+
+        builder.Entity<User>().ToTable("users");
         builder.Entity<User>().HasKey(p => p.Id);
         builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(c => c.Username).IsRequired().HasMaxLength(60);
         builder.Entity<User>().Property(c => c.Password).IsRequired().HasMaxLength(120);
         builder.Entity<User>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
+
+        builder.Entity<CommunityMember>().ToTable("community_members");
+        builder.Entity<CommunityMember>().HasKey(c => c.Id);
+        builder.Entity<CommunityMember>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<CommunityMember>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<CommunityMember>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
+        builder.Entity<CommunityMember>().Property(c => c.MembershipDate).IsRequired().HasDefaultValue(DateOnly.FromDateTime(DateTime.Now)).ValueGeneratedOnAdd();
+        //Relationship One to Many with Roles
+        builder.Entity<CommunityMember>()
+            .HasOne<Role>(c => c.Role)
+            .WithMany(r => r.CommunityMembers)
+            .HasForeignKey(c => c.RoleId);
+        //Relationship One to Many with Communities
+        builder.Entity<CommunityMember>()
+            .HasOne<Community>(c => c.Community)
+            .WithMany(c => c.CommunityMembers)
+            .HasForeignKey(c => c.CommunityId);
     }
 }
