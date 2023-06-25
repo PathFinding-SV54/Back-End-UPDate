@@ -2,5 +2,7 @@
 
 public class LocationData
 {
-    public string Description { get; set; }
+    public string LocationDescription { get; set; }
+    
+    public string LocationAddress { get; set; }
 }

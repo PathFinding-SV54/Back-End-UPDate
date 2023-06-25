@@ -50,7 +50,8 @@ public class LocationInfrastructure : ILocationInfrastructure
             if (location == null)
                 return false;
             
-            location.Description = locationData.Description;
+            location.LocationDescription = locationData.LocationDescription;
+            location.LocationAddress = locationData.LocationAddress;
 
             _updateDbContext.Locations.Update(location);
             await _updateDbContext.SaveChangesAsync();
