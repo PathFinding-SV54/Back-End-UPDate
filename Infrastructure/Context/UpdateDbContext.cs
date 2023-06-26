@@ -25,7 +25,7 @@ public class UpdateDbContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=root;Database=update_db;", serverVersion);
+            optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10628925;Pwd=87H6PJfi91;Database=sql10628925;", serverVersion);
         }
     }
     
@@ -41,7 +41,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<Activity>().Property(a => a.ActivityDescription).IsRequired().HasMaxLength(240);
         builder.Entity<Activity>().Property(a => a.ActivityDate).IsRequired();
         builder.Entity<Activity>().Property(a => a.ActivityType).IsRequired().HasMaxLength(30);
-        builder.Entity<Activity>().Property(a => a.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Activity>().Property(a => a.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<Activity>().Property(a => a.IsActive).IsRequired();
         //Relationship One to Many with Location
         builder.Entity<Activity>()
@@ -55,13 +55,13 @@ public class UpdateDbContext :DbContext
         builder.Entity<Community>().Property(c => c.CommunityName).IsRequired().HasMaxLength(30);
         builder.Entity<Community>().Property(c => c.CommunityDescription).IsRequired().HasMaxLength(500);
         builder.Entity<Community>().Property(c => c.CommunityVisibility).IsRequired().HasMaxLength(30);
-        builder.Entity<Community>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Community>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<Community>().Property(c => c.IsActive).IsRequired();
 
         builder.Entity<Participation>().ToTable("participations");
         builder.Entity<Participation>().HasKey(p => p.Id);
         builder.Entity<Participation>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Participation>().Property(p => p.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Participation>().Property(p => p.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<Participation>().Property(p => p.IsActive).IsRequired();
         //Relationship One to Many with Activity
         /* builder.Entity<Participation>()
@@ -78,14 +78,14 @@ public class UpdateDbContext :DbContext
         builder.Entity<Location>().HasKey(l => l.Id);
         builder.Entity<Location>().Property(l => l.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Location>().Property(l => l.LocationDescription).IsRequired().HasMaxLength(60);
-        builder.Entity<Location>().Property(l => l.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Location>().Property(l => l.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<Location>().Property(l => l.IsActive).IsRequired();
 
         builder.Entity<Role>().ToTable("roles");
         builder.Entity<Role>().HasKey(r => r.Id);
         builder.Entity<Role>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(15);
-        builder.Entity<Role>().Property(r => r.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Role>().Property(r => r.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<Role>().Property(r => r.IsActive).IsRequired();
 
         builder.Entity<User>().ToTable("users");
@@ -98,7 +98,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<CommunityMember>().ToTable("community_members");
         builder.Entity<CommunityMember>().HasKey(c => c.Id);
         builder.Entity<CommunityMember>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<CommunityMember>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<CommunityMember>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
         builder.Entity<CommunityMember>().Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
         builder.Entity<CommunityMember>().Property(c => c.MembershipDate).IsRequired().HasDefaultValue(DateOnly.FromDateTime(DateTime.Now)).ValueGeneratedOnAdd();
         //Relationship One to Many with Roles
