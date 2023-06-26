@@ -49,8 +49,9 @@ public class CommunityInfrastructure : ICommunityInfrastructure
             if (community == null)
                 return false;
             
-            community.Name = communityData.Name;
-            community.Description = communityData.Description;
+            community.CommunityName = communityData.CommunityName;
+            community.CommunityDescription = communityData.CommunityDescription;
+            community.CommunityVisibility = communityData.CommunityVisibility;
 
             _updateDbContext.Communities.Update(community);
             await _updateDbContext.SaveChangesAsync();
