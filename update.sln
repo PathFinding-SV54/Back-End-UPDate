@@ -4,9 +4,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateAPI", "UpdateAPI\Upda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{0CE2B0C0-531F-4EF0-BBFA-E56F2D6D84CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "Infraestructure\Infraestructure.csproj", "{77401BA6-5741-4A82-B335-A275F7ECD504}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{77401BA6-5741-4A82-B335-A275F7ECD504}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpDate.Domain.Test", "UpDate.Domain.Test\UpDate.Domain.Test.csproj", "{1F33FC88-EB16-48D7-ADA5-E0FBBF6BE930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{52187F57-7841-451A-87C7-D93EC147D2C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 		{1F33FC88-EB16-48D7-ADA5-E0FBBF6BE930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F33FC88-EB16-48D7-ADA5-E0FBBF6BE930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F33FC88-EB16-48D7-ADA5-E0FBBF6BE930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52187F57-7841-451A-87C7-D93EC147D2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52187F57-7841-451A-87C7-D93EC147D2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52187F57-7841-451A-87C7-D93EC147D2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52187F57-7841-451A-87C7-D93EC147D2C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
