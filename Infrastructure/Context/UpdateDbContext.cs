@@ -52,8 +52,9 @@ public class UpdateDbContext :DbContext
         builder.Entity<Community>().ToTable("communities");
         builder.Entity<Community>().HasKey(c => c.Id);
         builder.Entity<Community>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Community>().Property(c => c.Name).IsRequired().HasMaxLength(30);
-        builder.Entity<Community>().Property(c => c.Description).IsRequired().HasMaxLength(500);
+        builder.Entity<Community>().Property(c => c.CommunityName).IsRequired().HasMaxLength(30);
+        builder.Entity<Community>().Property(c => c.CommunityDescription).IsRequired().HasMaxLength(500);
+        builder.Entity<Community>().Property(c => c.CommunityVisibility).IsRequired().HasMaxLength(30);
         builder.Entity<Community>().Property(c => c.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Community>().Property(c => c.IsActive).IsRequired();
 

@@ -2,8 +2,9 @@
 
 public class Community : BaseModel
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string CommunityName { get; set; }
+    public string CommunityDescription { get; set; }
+    public string CommunityVisibility { get; set; }
     
     //Relationship with CommunityMembers table
     public ICollection<CommunityMember> CommunityMembers { get; set; }

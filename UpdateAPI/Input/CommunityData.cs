@@ -2,6 +2,7 @@
 
 public class CommunityData
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string CommunityName { get; set; }
+    public string CommunityDescription { get; set; }
+    public string CommunityVisibility { get; set; }
 }
