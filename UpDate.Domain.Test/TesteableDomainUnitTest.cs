@@ -33,7 +33,7 @@ public class UnitTest1
         //Arrange
         var activity = new Activity()
         {
-            Title = "test1"
+            ActivityTitle = "test1"
         };
         var mockTutorialInfrastructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfrastructure.Setup(t =>
@@ -53,7 +53,7 @@ public class UnitTest1
     {
         var activity = new Activity()
         {
-            Title = "test1"
+            ActivityTitle = "test1"
         };
         var mockTutorialInfrastructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfrastructure.Setup(t =>
@@ -71,7 +71,7 @@ public class UnitTest1
     {
         var activity = new Activity()
         {
-            Title = "test1"
+            ActivityTitle = "test1"
         };
         var mockTutorialInfrastructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfrastructure.Setup(t =>
@@ -102,7 +102,7 @@ public class UnitTest1
     {
         var activityData = new Activity()
         {
-            Title = "test1"
+            ActivityTitle = "test1"
         };
         var mockTutorialInfrastructure = new Mock<IActivityInfrastructure>();
         mockTutorialInfrastructure.Setup(t =>

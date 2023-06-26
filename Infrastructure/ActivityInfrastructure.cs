@@ -47,9 +47,11 @@ public class ActivityInfrastructure : IActivityInfrastructure
             if (activity == null)
                 return false;
             
-            activity.Title = activityData.Title;
-            activity.Description = activityData.Description;
-            activity.Address = activityData.Address;
+            activity.ActivityTitle = activityData.ActivityTitle;
+            activity.ActivityDescription = activityData.ActivityDescription;
+            activity.ActivityDate = activityData.ActivityDate;
+            activity.ActivityType = activityData.ActivityType;
+            activity.LocationId = activityData.LocationId;
 
             _updateDbContext.Activities.Update(activity); //modifico
             await _updateDbContext.SaveChangesAsync();

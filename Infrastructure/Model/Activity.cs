@@ -2,12 +2,13 @@
 
 public class Activity : BaseModel
 {
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string Address { get; set; }
-    
+    public string ActivityTitle { get; set; }
+    public string ActivityDescription { get; set; }
+    public DateTime ActivityDate { get; set; }
+    public string ActivityType { get; set; }
+
     //Relationship with participations table
-    public ICollection<Participation> Participations { get; set; }
+    // public ICollection<Participation> Participations { get; set; }
     
     //Relationship with locations table
     public int LocationId { get; set; }

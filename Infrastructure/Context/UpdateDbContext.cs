@@ -25,7 +25,7 @@ public class UpdateDbContext :DbContext
         if (!optionsBuilder.IsConfigured)
         {
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=pass;Database=updatedb;", serverVersion);
+            optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=root;Database=update_db;", serverVersion);
         }
     }
     
@@ -37,9 +37,10 @@ public class UpdateDbContext :DbContext
         builder.Entity<Activity>().ToTable("activities");
         builder.Entity<Activity>().HasKey(a => a.Id);
         builder.Entity<Activity>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Activity>().Property(a => a.Title).IsRequired().HasMaxLength(60);
-        builder.Entity<Activity>().Property(a => a.Description).IsRequired().HasMaxLength(240);
-        builder.Entity<Activity>().Property(a => a.Address).IsRequired().HasMaxLength(60);
+        builder.Entity<Activity>().Property(a => a.ActivityTitle).IsRequired().HasMaxLength(60);
+        builder.Entity<Activity>().Property(a => a.ActivityDescription).IsRequired().HasMaxLength(240);
+        builder.Entity<Activity>().Property(a => a.ActivityDate).IsRequired();
+        builder.Entity<Activity>().Property(a => a.ActivityType).IsRequired().HasMaxLength(30);
         builder.Entity<Activity>().Property(a => a.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Activity>().Property(a => a.IsActive).IsRequired();
         //Relationship One to Many with Location
@@ -62,10 +63,10 @@ public class UpdateDbContext :DbContext
         builder.Entity<Participation>().Property(p => p.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Participation>().Property(p => p.IsActive).IsRequired();
         //Relationship One to Many with Activity
-        builder.Entity<Participation>()
+        /* builder.Entity<Participation>()
             .HasOne<Activity>(p => p.Activity)
             .WithMany(a => a.Participations)
-            .HasForeignKey(p => p.ActivityId);
+            .HasForeignKey(p => p.ActivityId); */
         //Relationship One to Many with GroupMembers
         builder.Entity<Participation>()
             .HasOne<CommunityMember>(p => p.CommunityMember)
@@ -75,7 +76,7 @@ public class UpdateDbContext :DbContext
         builder.Entity<Location>().ToTable("locations");
         builder.Entity<Location>().HasKey(l => l.Id);
         builder.Entity<Location>().Property(l => l.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Location>().Property(l => l.Description).IsRequired().HasMaxLength(60);
+        builder.Entity<Location>().Property(l => l.LocationDescription).IsRequired().HasMaxLength(60);
         builder.Entity<Location>().Property(l => l.DateCreated).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Location>().Property(l => l.IsActive).IsRequired();
 
