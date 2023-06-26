@@ -52,6 +52,7 @@ public class LocationInfrastructure : ILocationInfrastructure
             
             location.LocationDescription = locationData.LocationDescription;
             location.LocationAddress = locationData.LocationAddress;
+            location.LocationImageUrl = locationData.LocationImageUrl;
 
             _updateDbContext.Locations.Update(location);
             await _updateDbContext.SaveChangesAsync();
